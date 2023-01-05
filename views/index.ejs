@@ -1,0 +1,124 @@
+<% include ./partials/header.ejs %> 
+<% include ./partials/navbar.ejs %> 
+<% include ./partials/sidebar.ejs %>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2 ml-2">
+          <div class="col-sm-6 col-lg-10">
+            <h1 class="m-0 font-weight-bold pt-2">
+              Data Magang Dinas Komunikasi dan Informatika <br>
+              Kota Banjarbaru
+            </h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6 col-lg-2">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item active">Dashboard</li>
+              <!-- <li class="breadcrumb-item active">Dashboard v1</li> -->
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row ml-3 mb-2">
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <p>Jumlah peserta magang <br> status aktif</p>
+                <h3><%= pesertaAktif.length %> <sup style="font-size: 16px" class=""> Siswa/Mahasiswa</sup></h3>
+              </div>
+              <div class="icon">
+                <i class="ion ion-person"></i>
+              </div>
+              <a class="small-box-footer pb-2"></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <p>Total peserta magang <br> tahun ini.</p>
+                <h3><%= peserta.length %> <sup style="font-size: 16px" class=""> Siswa/Mahasiswa</sup></h3>
+              </div>
+              <div class="icon">
+                <i class="ion ion-person"></i>
+              </div>
+              <a class="small-box-footer pb-2"></a>
+            </div>
+          </div>
+          <!-- ./col -->
+        </div>
+        <!-- /.row -->
+        <!-- daftar peserta magang row -->
+        <div class="row ml-3">
+          <div class="col-sm-12 pt-2">
+            <h2 class="m-0">
+              Daftar Siswa/Mahasiswa Peserta Magang
+            </h2>
+          </div><!-- /.col -->
+          <div class="col-lg-10 col-sm-6 pt-2 ml-2">
+            <div class="card">
+              <!-- <div class="card-header">
+                <h3 class="card-title">Striped Full Width Table</h3>
+              </div>
+              /.card-header -->
+              <div class="card-body p-0">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th style="width: 1px;"></th>
+                      <th>Nama Lengkap</th>
+                      <th>Asal Sekolah/Kampus</th>
+                      <th>Mulai</th>
+                      <th>Selesai</th>
+                      <th>Bidang Kegiatan</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% peserta.forEach((peserta, i) => {i++ %>
+                      <tr>
+                        <td><%= i %></td>
+                        <td class="font-weight-bold text-small"><%= peserta.name %></td>
+                        <td><%= peserta.instansi %></td>
+                        <td><%= tglFormat(peserta.tglmulai) %></td>
+                        <td><%= tglFormat(peserta.tglselesai) %></td>
+                        <td><%= peserta.biro.name %></td>
+                        <% if (Date.now() < peserta.tglmulai) { %>
+                          <td><span class="badge bg-warning">Proses</span></td>
+                          <% } else if (Date.now() >= peserta.tglmulai && Date.now() <= peserta.tglselesai) { %>
+                            <td><span class="badge bg-success">Aktif</span></td>
+                          <% } else { %>
+                            <td><span class="badge bg-info">Selesai</span></td>
+                        <% } %>
+                      </tr>
+                    <% }) %>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<% include ./partials/footer.ejs %>
+<% include ./partials/js.ejs %>
