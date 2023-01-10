@@ -42,18 +42,18 @@ module.exports = {
 
       let pembimbing = await Pembimbing({
         name: name.trim().toUpperCase(),
-        nip: nip.replaceAll(' ', ''),
+        nip: nip.replace(/ /gi, ''),
         jabatan: jabatan.trim().toUpperCase()
       })
       await pembimbing.save();
 
-      let userPembimbing = await User({
-        name: name.trim(),
-        username: nip.replaceAll(' ', ''),
-        password: nip.replaceAll(' ', ''),
-        role: 'pembimbing',
-      })
-      await userPembimbing.save()
+      // let userPembimbing = await User({
+      //   name: name.trim(),
+      //   username: nip.replace(/ /gi, ''),
+      //   password: nip.replace(/ /gi, ''),
+      //   role: 'pembimbing',
+      // })
+      // await userPembimbing.save()
 
       req.flash('alertMessage', 'Berhasil Menambah Data Pembimbing');
       req.flash('alertStatus', 'success');
@@ -89,9 +89,9 @@ module.exports = {
         { _id: id },
         {
           name: name.trim().toUpperCase(),
-          nip: nip.replaceAll(' ', ''),
+          nip: nip.replace(/ /gi, ''),
           jabatan: jabatan.trim().toUpperCase()
-      })
+        })
 
       req.flash('alertMessage', 'Berhasil Mengubah Data Pembimbing');
       req.flash('alertStatus', 'success');
