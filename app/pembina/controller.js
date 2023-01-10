@@ -40,7 +40,7 @@ module.exports = {
 
       let pembina = await Pembina({
         name: name.trim().toUpperCase(),
-        nip: nip.replace(' ', ''),
+        nip: nip.replace(/ /gi, ''),
         jabatan: jabatan.trim().toUpperCase()
       })
       await pembina.save();
@@ -79,7 +79,7 @@ module.exports = {
         { _id: id },
         {
           name: name.trim().toUpperCase(),
-          nip: nip.replaceAll(' ', ''),
+          nip: nip.replace(/ /gi, ''),
           jabatan: jabatan.trim().toUpperCase()
         })
 
