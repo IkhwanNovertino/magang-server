@@ -40,7 +40,7 @@ module.exports = {
 
       let pembina = await Pembina({
         name: name.trim().toUpperCase(),
-        nip: nip.replaceAll(' ', ''),
+        nip: nip.replace(' ', ''),
         jabatan: jabatan.trim().toUpperCase()
       })
       await pembina.save();
@@ -83,8 +83,8 @@ module.exports = {
           jabatan: jabatan.trim().toUpperCase()
         })
 
-        req.flash('alertMessage', 'Berhasil Mengubah Data Pembina');
-        req.flash('alertStatus', 'success');
+      req.flash('alertMessage', 'Berhasil Mengubah Data Pembina');
+      req.flash('alertStatus', 'success');
       res.redirect('/pembina');
     } catch (error) {
       req.flash('alertMessage', `${error.message}`);
